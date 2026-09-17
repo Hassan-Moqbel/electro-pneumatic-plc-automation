@@ -1,0 +1,12 @@
+# OS metadata and cache
+Thumbs.db
+ehthumbs.db
+.DS_Store
+
+# Office temporary lock files
+~$*
+
+# CAD/Simulation backup files
+*.bak
+*.prm.bak
+*.prx.bak
