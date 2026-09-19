@@ -12,7 +12,7 @@ Automated manufacturing processes, ranging from packaging lines to robotic assem
 
 > [!CAUTION]
 > **Industrial Fluid Power Safety Callout**
-> Pneumatic systems typically operate at high kinetic energy potentials ($6-8\text{ bar}$ / $87-116\text{ psi}$). Maintenance requires strict **Lockout/Tagout (LOTO)** procedures incorporating dump valves to purge residual trapped air. Actuators generate massive instantaneous forces and travel at high velocities, creating severe mechanical pinch/crush points. Careful consideration must be paid to the fail-safe states of solenoid valves (spring-return vs. detented) to prevent unexpected actuation upon power loss or emergency stops (E-Stop).
+> Pneumatic systems typically operate at high kinetic energy potentials ($6-8\text{ bar}$/$87-116\text{ psi}$). Maintenance requires strict **Lockout/Tagout (LOTO)** procedures incorporating dump valves to purge residual trapped air. Actuators generate massive instantaneous forces and travel at high velocities, creating severe mechanical pinch/crush points. Careful consideration must be paid to the fail-safe states of solenoid valves (spring-return vs. detented) to prevent unexpected actuation upon power loss or emergency stops (E-Stop).
 
 ## System Highlights
 - **Multi-Actuator Sequencing**: Executes a precise interlocking cascade (e.g., A+ B+ A- B-) utilizing fluid power kinematics.
