@@ -12,7 +12,7 @@ Automated manufacturing processes, ranging from packaging lines to robotic assem
 
 > [!CAUTION]
 > **Industrial Fluid Power Safety Callout**
-> Pneumatic systems typically operate at high kinetic energy potentials ($6-8\text{" bar"}$ / $87-116\text{" psi"}$). Maintenance requires strict **Lockout/Tagout (LOTO)** procedures incorporating dump valves to purge residual trapped air. Actuators generate massive instantaneous forces and travel at high velocities, creating severe mechanical pinch/crush points. Careful consideration must be paid to the fail-safe states of solenoid valves (spring-return vs. detented) to prevent unexpected actuation upon power loss or emergency stops (E-Stop).
+> Pneumatic systems typically operate at high kinetic energy potentials ($6-8\text{ bar}$ / $87-116\text{ psi}$). Maintenance requires strict **Lockout/Tagout (LOTO)** procedures incorporating dump valves to purge residual trapped air. Actuators generate massive instantaneous forces and travel at high velocities, creating severe mechanical pinch/crush points. Careful consideration must be paid to the fail-safe states of solenoid valves (spring-return vs. detented) to prevent unexpected actuation upon power loss or emergency stops (E-Stop).
 
 ## System Highlights
 - **Multi-Actuator Sequencing**: Executes a precise interlocking cascade (e.g., A+ B+ A- B-) utilizing fluid power kinematics.
@@ -22,7 +22,7 @@ Automated manufacturing processes, ranging from packaging lines to robotic assem
 
 ## System Architecture Diagram
 
-mermaid
+```mermaid
 flowchart TD
     AIR["Main Air Supply & FRL Service Unit"] --> DIST["Manifold Distribution Block"]
     
@@ -50,30 +50,30 @@ flowchart TD
     
     PLC_OUT -.->|24V DC Actuation| VALVEA
     PLC_OUT -.->|24V DC Actuation| VALVEB
-
+```
 
 ## Theoretical & Mathematical Models
 
-### 1. Theoretical Extension Force ($F_{"ext"}$)
-The maximum output force during the outward stroke is a function of the system pressure ($P_{"sys"}$) acting on the full piston bore diameter ($D$):
-$$F_{"ext"} = P_{"sys"} \cdot A_{"piston"} = P_{"sys"} \cdot \frac{"\pi D^2"}{4}$$
+### 1. Theoretical Extension Force ($F_{ext}$)
+The maximum output force during the outward stroke is a function of the system pressure ($P_{sys}$) acting on the full piston bore diameter ($D$):
+$$F_{ext} = P_{sys} \cdot A_{piston} = P_{sys} \cdot \frac{\pi D^2}{4}$$
 
-### 2. Theoretical Retraction Force ($F_{"ret"}$)
+### 2. Theoretical Retraction Force ($F_{ret}$)
 During the return stroke, the force is reduced due to the surface area displaced by the piston rod ($d$):
-$$F_{"ret"} = P_{"sys"} \cdot (A_{"piston"} - A_{"rod"}) = P_{"sys"} \cdot \frac{"\pi (D^2 - d^2)"}{4}$$
+$$F_{ret} = P_{sys} \cdot (A_{piston} - A_{rod}) = P_{sys} \cdot \frac{\pi (D^2 - d^2)}{4}$$
 
 ### 3. Effective Dynamic Actuation Force
-Frictional losses within the cylinder seals (typically $10-15\%$) mean the true dynamic force available to move the load ($F_{"eff"}$) is less than the theoretical static force:
-$$F_{"eff"} = \eta_{"mech"} \cdot F_{"theoretical"} \quad (\text{"where "} \eta_{"mech"} \approx 0.85 - 0.90)$$
+Frictional losses within the cylinder seals (typically $10-15\%$) mean the true dynamic force available to move the load ($F_{eff}$) is less than the theoretical static force:
+$$F_{eff} = \eta_{mech} \cdot F_{theoretical} \quad (\text{where } \eta_{mech} \approx 0.85 - 0.90)$$
 
-### 4. Normalized Free Air Consumption ($Q_{"N"}$)
+### 4. Normalized Free Air Consumption ($Q_{N}$)
 To size the industrial compressor correctly, the total air consumed per double stroke (normalized to atmospheric conditions) is computed as:
-$$Q_{"N"} = \frac{"\pi"}{4} \left(2D^2 - d^2\right) \cdot s \cdot \frac{"P_{sys"} + P_{"atm"}}{P_{"atm"}} \cdot 10^{-6} \quad ["\text{"NL/cycle"}"]$$
+$$Q_{N} = \frac{\pi}{4} \left(2D^2 - d^2\right) \cdot s \cdot \frac{P_{sys} + P_{atm}}{P_{atm}} \cdot 10^{-6} \quad [\text{NL/cycle}]$$
 *(Where $s$ is stroke length in mm).*
 
 ### 5. Signal Overlap Prevention & Latching
 In sequences where a limit switch is physically held down while its opposite motion is requested (e.g., commanding A- while a1 is still pressed), signal conflicts occur. The PLC resolves this via Set-Reset (SR) latching arrays or memory flag shifting:
-$$M_{"step(n)"} = (\text{"Sensor\_Trigger"} \text{" AND "} M_{"step(n-1)"}) \text{" OR "} M_{"step(n)"} \text{" AND NOT "} M_{"step(n+1)"}$$
+$$M_{step(n)} = (\text{Sensor\_Trigger} \text{ AND } M_{step(n-1)}) \text{ OR } M_{step(n)} \text{ AND NOT } M_{step(n+1)}$$
 
 ## Displacement-Step Diagram & Sequence Matrix
 | Step | Action | PLC Memory State | Sensor Triggering Transition | Active Solenoid |
@@ -90,7 +90,7 @@ $$M_{"step(n)"} = (\text{"Sensor\_Trigger"} \text{" AND "} M_{"step(n-1)"}) \tex
 | **Pneumatic Cylinders** | Double-Acting, Magnetic Piston | Primary mechanical actuation |
 | **Control Valves** | 5/2-Way Directional Solenoid | Airflow commutation |
 | **Feedback Sensors** | Magnetic Reed Switches (NO) | End-of-stroke verification |
-| **FRL Unit** | Filter, Regulator, Lubricator | Air supply conditioning ($6 \text{" bar"}$) |
+| **FRL Unit** | Filter, Regulator, Lubricator | Air supply conditioning ($6 \text{ bar}$) |
 | **PLC Output Relays** | 24V DC / 2A Discrete outputs | Solenoid coil energization |
 
 ## Authentic Artifacts Catalog
@@ -108,4 +108,4 @@ Mechatronics Engineer | Mechanical Design & CAD (SolidWorks & AutoCAD) | Prevent
 [GitHub](https://github.com/Hassan-Moqbel) · [Facebook](https://www.facebook.com/share/1BqxAgVjHi/) · [LinkedIn](https://www.linkedin.com/in/hassan-moqbel)
 
 ## License
-This project is licensed under the ["MIT License"](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
