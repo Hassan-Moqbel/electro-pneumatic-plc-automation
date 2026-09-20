@@ -78,7 +78,7 @@ $$
 F_{\text{eff}} = \eta_{\text{mech}} \cdot F_{\text{theoretical}}
 $$
 
-*(where $\eta_{\text{mech}} \approx 0.85\text{ to }0.90$)*
+Where the mechanical efficiency factor is $\eta_{\text{mech}} \approx 0.85 \text{ to } 0.90$.
 
 ### 4. Normalized Free Air Consumption ($Q_N$)
 
@@ -88,14 +88,14 @@ $$
 Q_N = \frac{\pi}{4} (2D^2 - d^2) \cdot s \cdot \frac{P_{\text{sys}} + P_{\text{atm}}}{P_{\text{atm}}} \cdot 10^{-6} \quad [\text{NL/cycle}]
 $$
 
-*(where $s$ is the stroke length in mm, $P_{\text{sys}}$ is gauge pressure, and $P_{\text{atm}}$ is atmospheric pressure).*
+Where $s$ is stroke length in mm, $P_{\text{sys}}$ is gauge pressure, and $P_{\text{atm}}$ is atmospheric pressure.
 
 ### 5. Signal Overlap Prevention & Latching
 
 In sequences where a limit switch is physically held down while its opposite motion is requested (e.g., commanding A- while a1 is still pressed), signal conflicts occur. The PLC resolves this via Set-Reset (SR) latching arrays or memory flag shifting:
 
 $$
-M_{\text{step}(n)} = \Big( \text{Sensor\_Trigger} \text{ AND } M_{\text{step}(n-1)} \Big) \text{ OR } \Big( M_{\text{step}(n)} \text{ AND NOT } M_{\text{step}(n+1)} \Big)
+M_{\text{step}(n)} = \Big( \text{Sensor Trigger} \text{ AND } M_{\text{step}(n-1)} \Big) \text{ OR } \Big( M_{\text{step}(n)} \text{ AND NOT } M_{\text{step}(n+1)} \Big)
 $$
 
 ## Displacement-Step Diagram & Sequence Matrix
