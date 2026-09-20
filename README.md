@@ -54,26 +54,49 @@ flowchart TD
 
 ## Theoretical & Mathematical Models
 
-### 1. Theoretical Extension Force ($F_{ext}$)
-The maximum output force during the outward stroke is a function of the system pressure ($P_{sys}$) acting on the full piston bore diameter ($D$):
-$$F_{ext} = P_{sys} \cdot A_{piston} = P_{sys} \cdot \frac{\pi D^2}{4}$$
+### 1. Theoretical Extension Force ($F_{\text{ext}}$)
 
-### 2. Theoretical Retraction Force ($F_{ret}$)
+The maximum output force during the outward stroke is a function of the system pressure ($P_{\text{sys}}$) acting on the full piston bore diameter ($D$):
+
+$$
+F_{\text{ext}} = P_{\text{sys}} \cdot A_{\text{piston}} = P_{\text{sys}} \cdot \frac{\pi D^2}{4}
+$$
+
+### 2. Theoretical Retraction Force ($F_{\text{ret}}$)
+
 During the return stroke, the force is reduced due to the surface area displaced by the piston rod ($d$):
-$$F_{ret} = P_{sys} \cdot (A_{piston} - A_{rod}) = P_{sys} \cdot \frac{\pi (D^2 - d^2)}{4}$$
+
+$$
+F_{\text{ret}} = P_{\text{sys}} \cdot (A_{\text{piston}} - A_{\text{rod}}) = P_{\text{sys}} \cdot \frac{\pi (D^2 - d^2)}{4}
+$$
 
 ### 3. Effective Dynamic Actuation Force
-Frictional losses within the cylinder seals (typically $10-15\%$) mean the true dynamic force available to move the load ($F_{eff}$) is less than the theoretical static force:
-$$F_{eff} = \eta_{mech} \cdot F_{theoretical} \quad (\text{where } \eta_{mech} \approx 0.85 - 0.90)$$
 
-### 4. Normalized Free Air Consumption ($Q_{N}$)
+Frictional losses within the cylinder seals (typically 10% to 15%) mean the true dynamic force available to move the load ($F_{\text{eff}}$) is less than the theoretical static force:
+
+$$
+F_{\text{eff}} = \eta_{\text{mech}} \cdot F_{\text{theoretical}}
+$$
+
+*(where $\eta_{\text{mech}} \approx 0.85\text{ to }0.90$)*
+
+### 4. Normalized Free Air Consumption ($Q_N$)
+
 To size the industrial compressor correctly, the total air consumed per double stroke (normalized to atmospheric conditions) is computed as:
-$$Q_{N} = \frac{\pi}{4} \left(2D^2 - d^2\right) \cdot s \cdot \frac{P_{sys} + P_{atm}}{P_{atm}} \cdot 10^{-6} \quad [\text{NL/cycle}]$$
-*(Where $s$ is stroke length in mm).*
+
+$$
+Q_N = \frac{\pi}{4} (2D^2 - d^2) \cdot s \cdot \frac{P_{\text{sys}} + P_{\text{atm}}}{P_{\text{atm}}} \cdot 10^{-6} \quad [\text{NL/cycle}]
+$$
+
+*(where $s$ is the stroke length in mm, $P_{\text{sys}}$ is gauge pressure, and $P_{\text{atm}}$ is atmospheric pressure).*
 
 ### 5. Signal Overlap Prevention & Latching
+
 In sequences where a limit switch is physically held down while its opposite motion is requested (e.g., commanding A- while a1 is still pressed), signal conflicts occur. The PLC resolves this via Set-Reset (SR) latching arrays or memory flag shifting:
-$$M_{step(n)} = (\text{Sensor\_Trigger} \text{ AND } M_{step(n-1)}) \text{ OR } M_{step(n)} \text{ AND NOT } M_{step(n+1)}$$
+
+$$
+M_{\text{step}(n)} = \Big( \text{Sensor\_Trigger} \text{ AND } M_{\text{step}(n-1)} \Big) \text{ OR } \Big( M_{\text{step}(n)} \text{ AND NOT } M_{\text{step}(n+1)} \Big)
+$$
 
 ## Displacement-Step Diagram & Sequence Matrix
 | Step | Action | PLC Memory State | Sensor Triggering Transition | Active Solenoid |
